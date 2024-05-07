@@ -43,3 +43,4 @@ application-local.yml
 # 로그
 
 ./logs/*
+/logs/
