@@ -1,0 +1,180 @@
+
+version: '0.0.1 - demo'
+
+spring:
+  profiles:
+    active:
+  pid.file: demo.pid
+  application:
+    name: demo_application
+  servlet:
+    multipart:
+      enabled: true
+      maxFileSize: 100MB
+      maxRequestSize: 500MB
+
+  main:
+    allow-circular-references: false
+    allow-bean-definition-overriding: true
+
+  mvc:
+    hiddenmethod.filter.enabled: true
+
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+  config:
+    # Spring Cloud Config Server
+    import:
+
+  datasource:
+    driver-class-name:
+    jdbc-url:
+    username:
+    password:
+    connectionTimeout: 60000
+    maximumPoolSize: 300
+    minimumIdle: 10
+    maxLifetime: 175000
+    autoReconnect: true
+    validationQuery: select 1
+    leakDetectionThreshold: 60000
+    data-source-properties:
+      rewriteBatchedStatements: true # MySQL Batch Insert
+    hikari:
+      leak-detection-threshold: 60000
+
+  sql:
+    init:
+      platform:
+      schema:
+      data:
+      mode:
+
+  jpa:
+    open-in-view: false
+
+    format_sql: true
+    show-sql: false
+    generate-ddl: false
+    defer-datasource-initialization: true
+    hibernate:
+      jdbc.batch_size: 100
+      order_updates: true
+      #      order_inserts: true
+      ddl-auto:  #create create-drop, update, validate, none
+      #      use-new-id-generator-mappings: false
+      cache:
+        use_second_level_cache: false
+        use_query_cache: false
+        use_sql_comments: false
+      temp:
+        use_jdbc_metadata_defaults: false
+    properties:
+      hibernate.cache:
+        use_second_level_cache: false
+        use_query_cache: false
+      javax.persistence.sharedcache.mode: ENABLE_SELECTIVE
+
+  aop:
+    proxy-target-class: true
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+  cache:
+    type: NONE
+
+
+
+  data:
+    rest.basePath: /api
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+  thymeleaf:
+    enabled: false
+
+
+
+java.net.preferIPv4Stack: true
+
+server:
+  port: 8080
+  servlet.context-path: /
+  shutdown: graceful
+  compression:
+    enabled: false
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 2048
+  error:
+    whitelabel.enabled: true
+    #    include-exception: false
+    include-stacktrace: never
+    path: /error
+  ssl:
+    enabled: false
+  #    protocol: TLS
+  #    enabled-protocols: TLSv1.2
+  #    key-store-type: PKCS12
+  #    key-store: classpath:keystore/keystore.p12
+  #    key-store-password:
+  tomcat:
+    connection-timeout: 30000
+    threads:
+      max: 200 # ??? ? ?? thread? ? ??
+      min-spare: 10 # ????? ??? ? ?? thread? ??
+    accept-count: 100  # ??? ??? ? ?? ?? ?? ? (?? ? size)
+
+  jetty:
+    connection-idle-timeout: 30000
+    threads:
+      max: 200
+      min: 10
+
+logging:
+  config: classpath:logback-spring.xml
+
+api:
+  path-pattern: /api/**
+  path-pattern-v1: /api/v1/**
+  path-prefix: /api/
+  path-prefix-v1: /api/v1/
+
+resource:
+  # internal : classpath ??
+  # external : ?? ?? ??
+  scope: internal
+  path: static
+
+jwt:
+  secret-key:
+  expire-time-ms: 2592000000
+
+#springfox.documentation.enabled: false
+
+springdoc:
+  version: '@project.version@'
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  show-actuator: true
+  swagger-ui:
+    enabled: true
+    show-actuator: true
+    path: /index.html
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+    doc-expansion: none
+    operations-sorter: method
+    tags-sorter: alpha
+    groups-order: DESC
+  paths-to-match:
+    - /api/**

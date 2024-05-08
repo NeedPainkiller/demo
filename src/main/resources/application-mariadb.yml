@@ -1,0 +1,22 @@
+spring:
+  config.active.on-profile: mariadb
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    driver-Class-Name: org.mariadb.jdbc.Driver
+    driverClassName: org.mariadb.jdbc.Driver
+
+  jpa:
+    #    database-platform: MariaDB106Dialect
+    hibernate:
+      dialect: org.hibernate.dialect.MariaDB103Dialect
+      database-platform: org.hibernate.dialect.MariaDB103Dialect
+      dialect.storage_engine: innodb
+
+  quartz:
+    jobStore:
+      driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      lockHandler.selectWithLockSQL: SELECT * FROM {0}LOCKS WHERE LOCK_NAME = ? FOR UPDATE
+    #      lockHandler.selectWithLockSQL: SELECT * FROM {0}LOCKS WHERE LOCK_NAME = ?
+    properties.org.quartz.jobStore:
+      driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      lockHandler.selectWithLockSQL: SELECT * FROM {0}LOCKS WHERE LOCK_NAME = ? FOR UPDATE
