@@ -34,3 +34,5 @@ java.exe -server -D'spring.profiles.active=local,mariadb' -jar .\demo.jar
 ### Swagger
 
 - `http://localhost:8080/swagger-ui/index.html` 으로 접속하여 API 명세를 확인할 수 있습니다.
+
+- restdoc 은 적용중입니다
